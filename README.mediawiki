@@ -13,11 +13,11 @@ Comments in both tickets suggest that adding the page directive
  <%@page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 fixes the problem.
 
-This suggests that WLS 10.3.5, supporting Servlet 2.x and JSP 2.x might enforce encoding hints in the source and resulting bytecode, or otherwise look elsewhere when something is "awry." Not finding a good hint, the resulting servlet swallows the output, somewhere, and doesn't return it to the view on the response.
+This suggests that WLS 10.3.5, supporting Servlet 2.5 (2.4, 2.3, and 2.2 are also supported; configuration may be necessary) and JSP 2.1 (2.0, 1.1 and 1.0 are also supported; configuration may be necessary) might enforce encoding hints in the source and resulting bytecode, or otherwise look elsewhere when something is "awry." Not finding a good hint, the resulting servlet swallows the output, somewhere, and doesn't return it to the view on the response.
 
 Investigation of tickets included verbose tag logging and review of generated servlet code from the JSPs in WebLogic.
 
-Logging showed no exceptions, though Tomcat vs. WebLogic showed different implementations of JspWriterImpl (implementations).
+Logging showed no exceptions, though Tomcat vs. WebLogic showed different implementations of JspWriterImpl.
 
 It was found that the WLS generated code would differ with various encoding settings.
 
@@ -39,15 +39,11 @@ This source encoding setting actually builds platform agnostic bytecode. Try it 
 
 Additionally, the POM declares a <code>weblogic.xml</code> that sets the JSP encoding to UTF-8 as well.
 
-<nowiki>
-<pre>
-...
-<jsp-descriptor>
-    <encoding>UTF-8</encoding>
-</jsp-descriptor>
-...
-</pre>
-</nowiki>
+ ...
+ <jsp-descriptor>
+     <encoding>UTF-8</encoding>
+ </jsp-descriptor>
+ ...
 
 No encoding page directive is set.
 
