@@ -1,0 +1,51 @@
+==What is this?==
+Stripes is a presentation framework for building web applications using the latest Java technologies.
+
+Recent releases of Stripes, since v1.5.4, introduced a refactored templating tag library. The tag library has been reported to fail under WebLogic 10.3.x.
+
+Two Stripes JIRA tickets currently track this report:
+
+[[http://www.stripesframework.org/jira/browse/STS-823 STS-823]] (closed)
+[[http://www.stripesframework.org/jira/browse/STS-834 STS-834]] (open)
+
+Comments in both tickets suggest that adding the page directive
+ &lt;%@page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>gt;
+fixes the problem.
+
+This suggests that WLS 10.3.5, supporting Servlet 2.x and JSP 2.x might enforce encoding hints in the source and resulting bytecode, or otherwise look elsewhere when something is "awry." Not finding a good hint, the resulting servlet swallows the output, somewhere, and doesn't return it to the view on the response.
+
+Investigation of tickets included verbose tag logging and review of generated servlet code from the JSPs in WebLogic.
+
+Logging showed no exceptions, though Tomcat vs. WebLogic showed different implementations of JspWriterImpl (implementations).
+
+It was found that the WLS generated code would differ with various encoding settings.
+
+So this WAR attempts to show how one user of Stripes 1.5.6 on WebLogic 10.3.x set encoding hints from build to deploy.
+
+==Some Configuration Notes==
+
+The platform used in testing includes the following:
+
+# Fedora 15 BSD/Linux on Dell Intel i5 hardware
+# WebLogic 10.3.5
+# Java 1.6.0_29 (not JRockit)
+# Maven 3
+
+The Maven POM declares the source encoding for the project as UTF-8:
+ &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+
+This source encoding setting actually builds platform agnostic bytecode. Try it yourself on a Mac: remove the property, Maven will note that the source encoding will be assumed to be MacRoman and a "platform-specific build" will result.
+
+Additionally, the POM declares a <code>weblogic.xml</code> that sets the JSP encoding to UTF-8 as well.
+
+<pre>
+...
+<jsp-descriptor>
+    <encoding>UTF-8</encoding>
+</jsp-descriptor>
+...
+</pre>
+
+No encoding page directive is set.
+
+==References==
