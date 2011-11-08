@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <weblogic-web-app
+ xmlns="http://www.bea.com/ns/weblogic/90"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-web-app.xsd">
+     <context-root>/wls-stripes</context-root>
+     <jsp-descriptor>
+         <encoding>UTF-8</encoding>
+      </jsp-descriptor>
+ </weblogic-web-app>
