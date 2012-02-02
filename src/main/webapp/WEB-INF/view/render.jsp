@@ -1,8 +1,8 @@
 <%@ taglib prefix="s" 
     uri="http://stripes.sourceforge.net/stripes.tld" %>
 
-<stripes:layout-render name="/WEB-INF/view/layout.jsp" title="[WebLogic Test]">
-    <stripes:layout-component name="testing">
+<s:layout-render name="/WEB-INF/view/layout.jsp" title="[Page Title (if body, fail]">
+    <s:layout-component name="testing">
         <p>Nice Component!</p>
-    </stripes:layout-component>
-</stripes:layout-render>
+    </s:layout-component>
+</s:layout-render>

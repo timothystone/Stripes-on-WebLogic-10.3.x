@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
- <weblogic-web-app
- xmlns="http://www.bea.com/ns/weblogic/90"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-web-app.xsd">
-     <context-root>/wls-stripes</context-root>
-     <jsp-descriptor>
-         <encoding>UTF-8</encoding>
-      </jsp-descriptor>
- </weblogic-web-app>
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/weblogic-web-app">
+    <context-root>/wls-stripes</context-root>
+    <jsp-descriptor>
+
+<!--    The encoding jsp-descriptor param has been deprecated.                                                       -->
+<!--    Consider declaring the encoding in the jsp-config element (web.xml),                                         -->
+<!--
+        </jsp-config>
+          <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+          </jsp-property-group>
+        </jsp-config>
+-->
+<!--    or as a page directive (pageEncoding) instead.                                                               -->
+<!--        
+        <encoding>UTF-8</encoding>
+-->
+<!--    set these appropriately for your system, provided as a guide.                                                -->
+<!--    These will let you examine the generated servlets from the JSPs                                              -->    
+<!--
+        <keepgenerated>true</keepgenerated>
+        <working-dir>/tmp/wls-work</working-dir>
+-->
+    </jsp-descriptor>
+<!--    
+    <container-descriptor>
+        <prefer-web-inf-classes>true</prefer-web-inf-classes>          
+    </container-descriptor>
+-->
+</weblogic-web-app>
