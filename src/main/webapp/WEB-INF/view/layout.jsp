@@ -1,6 +1,9 @@
 <%@ taglib prefix="s" 
     uri="http://stripes.sourceforge.net/stripes.tld" %>
-
+<%--
+<%@ taglib prefix="s" 
+    uri="http://stripes.sourceforge.net/stripes-buffered-layout.tld" %>
+--%>
 <s:layout-definition>
   <!doctype html>
   <html>
